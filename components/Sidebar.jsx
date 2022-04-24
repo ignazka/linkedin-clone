@@ -1,8 +1,9 @@
 import { AddRounded, BookmarkOutlined } from "@mui/icons-material"
 import { Avatar } from "@mui/material"
 import Image from "next/image"
-
+import { useSession } from "next-auth/react"
 function SideBar() {
+    const { data: session } = useSession()
     return (
         <div className="space-y-2 min-w-max max-w-lg">
             {/* Top */}
@@ -12,12 +13,12 @@ function SideBar() {
 
                 </div>
 
-                <Avatar src='/avatar.jpg' className='!h-14 !w-14 !top-4 !cursor-pointer !absolute !border-2' />
+                <Avatar src={session?.user?.image} className='!h-14 !w-14 !top-4 !cursor-pointer !absolute !border-2' />
 
 
                 <div className='mt-5 py-4 space-x-0.5'>
-                    <h4 className='hover:underline underline-offset-1 cursor-pointer decoration-purple-700'>John Doe</h4>
-                    <p className='text-black/60 dark:text-white/75 text-sm'>john@doe.io</p>
+                    <h4 className='hover:underline underline-offset-1 cursor-pointer decoration-purple-700'>{session?.user?.name}</h4>
+                    <p className='text-black/60 dark:text-white/75 text-sm'>{session?.user?.email}</p>
 
                 </div>
                 <div className="hidden md:inline text-left dark:text-white/75 text-sm">
