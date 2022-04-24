@@ -45,9 +45,9 @@ function Header() {
         <HeaderLink Icon={GroupIcon} text='My Network' feed />
         <HeaderLink Icon={BusinessCenterIcon} text='Jobs' feed hidden />
         <HeaderLink Icon={ChatIcon} text='Messaging' feed />
-        <HeaderLink Icon={NotificationsIcon} text='Notifications' />
+        <HeaderLink Icon={NotificationsIcon} />
         <HeaderLink Icon={Avatar} text='Me' avatar feed hidden />
-        <HeaderLink Icon={AppsOutlinedIcon} text='Work' />
+        <HeaderLink Icon={AppsOutlinedIcon} />
 
         {/* dark mode toggler */}
         {mounted &&
