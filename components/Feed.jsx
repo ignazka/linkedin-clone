@@ -1,6 +1,12 @@
+import Input from "./Input"
+
 function Feed() {
     return (
-        <div>Feed</div>
+        <div className="space-y-6 pb-24 max-w-lg">
+            <Input />
+            {/* Posts */}
+
+        </div>
     )
 }
 
