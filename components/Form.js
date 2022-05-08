@@ -1,11 +1,13 @@
 import { useSession } from 'next-auth/react'
 import { useRecoilState } from 'recoil'
-import { modalState, modalTypeState } from '../atoms/modelAtom'
+import { modalState } from '../atoms/modelAtom'
+import { handlePostState } from '../atoms/postAtom'
 import React from 'react'
 import { useState } from 'react'
 function Form() {
     const { data: session } = useSession()
     const [modalOpen, setModalOpen] = useRecoilState(modalState)
+    const [handlePost, setHandlePost] = useRecoilState(handlePostState)
     const [input, setInput] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const handleChange = ({ target }) => setInput(target.value)
@@ -33,7 +35,7 @@ function Form() {
                 },
             })
         const responseData = await response.json()
-        console.log(responseData)
+        setHandlePost(true)
         setModalOpen(false)
     }
     return (
