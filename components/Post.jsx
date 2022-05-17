@@ -6,7 +6,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import ThumbUpOffAltRoundedIcon from '@mui/icons-material/ThumbUpOffAltRounded';
 import { modalState, modalTypeState } from '../atoms/modelAtom';
-import { getPostsState } from '../atoms/postAtom'
+import { getPostsState, handlePostState } from '../atoms/postAtom'
 import { useRecoilState } from 'recoil';
 import { CommentOutlined, DeleteRounded, ReplyRounded, } from '@mui/icons-material';
 import { useSession } from 'next-auth/react'
@@ -17,11 +17,26 @@ function Post({ post, modalPost }) {
     const [modalOpen, setModalOpen] = useRecoilState(modalState)
     const [modalType, setModalType] = useRecoilState(modalTypeState)
     const [postState, setPostState] = useRecoilState(getPostsState)
+    const [handlePost, setHandlePost] = useRecoilState(handlePostState)
     const [liked, setLiked] = useState(false)
     const { data: session } = useSession()
 
+
     const truncate = (string, maxCharacters) =>
         string?.length > maxCharacters ? string.substr(0, maxCharacters - 1) + '...see more' : string;
+
+    const deletePost = async () => {
+        const response = await fetch(`/api/posts/${post._id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        setHandlePost(true)
+        setModalOpen(false)
+    }
+
     return (
         <div className={`bg-white dark:bg-[#1D2226] py-2.5 border ${modalPost ? 'rounded-r-lg' : 'rounded-lg'} border-gray-300 dark:border-none`}>
             <div className='flex items-center px-2.5 cursor-pointer'>
@@ -79,7 +94,7 @@ function Post({ post, modalPost }) {
                     </button>
                 )}
                 {session?.user?.email === post.email ? (
-                    <button className='postButton focus:text-red-400'>
+                    <button className='postButton focus:text-red-400' onClick={deletePost}>
                         <DeleteRounded />
                         <h4>Delete post</h4>
                     </button>
