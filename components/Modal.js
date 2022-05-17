@@ -6,8 +6,9 @@ import { useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import Form from "./Form";
 import { useRecoilValue } from "recoil";
+import { getPostsState } from "../atoms/postAtom";
 // import { getPostState } from "../atoms/postAtom";
-// import Post from "./Post";
+import Post from "./Post";
 
 const dropIn = {
     hidden: {
@@ -55,7 +56,7 @@ const gifYouUp = {
 
 const Modal = ({ handleClose, type }) => {
     const { data: session } = useSession();
-    // const post = useRecoilValue(getPostState);
+    const post = useRecoilValue(getPostsState);
 
     return (
         <Backdrop onClick={handleClose}>
@@ -98,12 +99,12 @@ const Modal = ({ handleClose, type }) => {
                     <motion.img
                         alt=""
                         onDoubleClick={handleClose}
-                        src={post.photoUrl}
+                        src={post.imageUrl}
                         className="object-contain max-h-[80vh] w-full max-w-3xl rounded-l-lg"
                     />
-                    {/* <div className="w-full md:w-3/5 bg-white dark:bg-[#1D2226] rounded-r-lg">
+                    <div className="w-full md:w-3/5 bg-white dark:bg-[#1D2226] rounded-r-lg">
                         <Post post={post} modalPost />
-                    </div> */}
+                    </div>
                 </motion.div>
             )}
         </Backdrop>
