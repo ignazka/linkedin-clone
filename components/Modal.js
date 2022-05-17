@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Backdrop from "./Backdrop";
+import BackDrop from "./BackDrop";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import IconButton from "@mui/material/IconButton";
 import { useSession } from "next-auth/react";
@@ -59,7 +59,7 @@ const Modal = ({ handleClose, type }) => {
     const post = useRecoilValue(getPostsState);
 
     return (
-        <Backdrop onClick={handleClose}>
+        <D onClick={handleClose}>
             {type === "dropIn" && (
                 <motion.div
                     onClick={(e) => e.stopPropagation()}
@@ -107,7 +107,7 @@ const Modal = ({ handleClose, type }) => {
                     </div>
                 </motion.div>
             )}
-        </Backdrop>
+        </BackDrop>
     );
 };
 
