@@ -7,7 +7,6 @@ import { Avatar } from "@mui/material";
 import Form from "./Form";
 import { useRecoilValue } from "recoil";
 import { getPostsState } from "../atoms/postAtom";
-// import { getPostState } from "../atoms/postAtom";
 import Post from "./Post";
 
 const dropIn = {
@@ -59,7 +58,7 @@ const Modal = ({ handleClose, type }) => {
     const post = useRecoilValue(getPostsState);
 
     return (
-        <D onClick={handleClose}>
+        <BackDrop onClick={handleClose}>
             {type === "dropIn" && (
                 <motion.div
                     onClick={(e) => e.stopPropagation()}
