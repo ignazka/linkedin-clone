@@ -9,7 +9,7 @@ function SideBar() {
             {/* Top */}
             <div className="bg-white rounded-lg overflow-hidden flex relative flex-col items-center text-center border border-x-gray-300 dark:border-none dark:bg-[#1D2226]">
                 <div className="relative w-full h-14">
-                    <Image src='https://rb.gy/i26zak' layout="fill" priority />
+                    <Image src='https://rb.gy/i26zak' alt='' layout="fill" priority />
 
                 </div>
 

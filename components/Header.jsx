@@ -28,7 +28,7 @@ function Header() {
       <div className='flex items-center space-x-2 w-full max-w-xs'>
         {mounted &&
           <>
-            {resolvedTheme === 'dark' ? (<Image src='https://rb.gy/bizvqj' width={45} height={45} />) : (<Image src='https://rb.gy/dpmd9s' width={55} height={55} />)}
+            {resolvedTheme === 'dark' ? (<Image src='https://rb.gy/bizvqj' alt='' width={45} height={45} />) : (<Image src='https://rb.gy/dpmd9s' alt='' width={55} height={55} />)}
           </>
         }
         <div className='dark:md:bg-gray-700 flex items-center space-x-1 py-2.5 px-4 rounded w-full'>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image';
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
@@ -69,7 +70,7 @@ function Post({ post, modalPost }) {
             )}
 
             {post.imageUrl && !modalPost && (
-                <img src={post.imageUrl} alt='' className='w-full cursor-pointer' onClick={() => {
+                <Image src={post.imageUrl} alt='' className='w-full cursor-pointer' onClick={() => {
                     setModalOpen(true)
                     setModalType('gifYouUp');
                     setPostState(post)
