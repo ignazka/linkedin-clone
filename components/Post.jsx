@@ -70,7 +70,7 @@ function Post({ post, modalPost }) {
             )}
 
             {post.imageUrl && !modalPost && (
-                <Image src={post.imageUrl} alt='' className='w-full cursor-pointer' onClick={() => {
+                <img src={post.imageUrl} alt='' className='w-full cursor-pointer' onClick={() => {
                     setModalOpen(true)
                     setModalType('gifYouUp');
                     setPostState(post)
