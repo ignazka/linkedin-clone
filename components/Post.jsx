@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Image from 'next/image';
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
@@ -11,6 +10,7 @@ import { getPostsState, handlePostState } from '../atoms/postAtom'
 import { useRecoilState } from 'recoil';
 import { CommentOutlined, DeleteRounded, ReplyRounded, } from '@mui/icons-material';
 import { useSession } from 'next-auth/react'
+import TimeAgo from 'timeago-react'
 
 function Post({ post, modalPost }) {
 
@@ -47,6 +47,7 @@ function Post({ post, modalPost }) {
                         {post.username}
                     </h6>
                     <p className='text-sm dark:text-white/75 opacity-80'>{post.email}</p>
+                    <TimeAgo datetime={post.createdAt} className='text-xs opacity-80 dark:text-white/75' />
                 </div>
                 {modalPost ? (
                     <IconButton onClick={() => setModalOpen(false)}>
