@@ -15,10 +15,10 @@ import TimeAgo from 'timeago-react'
 function Post({ post, modalPost }) {
 
     const [showInput, setShowInput] = useState(false)
-    const [modalOpen, setModalOpen] = useRecoilState(modalState)
-    const [modalType, setModalType] = useRecoilState(modalTypeState)
-    const [postState, setPostState] = useRecoilState(getPostsState)
-    const [handlePost, setHandlePost] = useRecoilState(handlePostState)
+    const [, setModalOpen] = useRecoilState(modalState)
+    const [, setModalType] = useRecoilState(modalTypeState)
+    const [, setPostState] = useRecoilState(getPostsState)
+    const [, setHandlePost] = useRecoilState(handlePostState)
     const [liked, setLiked] = useState(false)
     const { data: session } = useSession()
 
@@ -27,15 +27,19 @@ function Post({ post, modalPost }) {
         string?.length > maxCharacters ? string.substr(0, maxCharacters - 1) + '...see more' : string;
 
     const deletePost = async () => {
-        const response = await fetch(`/api/posts/${post._id}`,
-            {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-        setHandlePost(true)
-        setModalOpen(false)
+        try {
+            await fetch(`/api/posts/${post._id}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+            setHandlePost(true)
+            setModalOpen(false)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

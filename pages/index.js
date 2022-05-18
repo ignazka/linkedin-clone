@@ -9,18 +9,20 @@ import { useRecoilState } from 'recoil';
 import { modalState, modalTypeState } from '../atoms/modelAtom';
 import Modal from '../components/Modal';
 import { connectToDatabase } from '../util/mongodb'
+import Widgets from '../components/Widgets'
 
-export default function Home({ posts }) {
+export default function Home({ posts, articles }) {
   const [modalOpen, setModalOpen] = useRecoilState(modalState)
-  const [modalType, setModalType] = useRecoilState(modalTypeState)
+  const [modalType] = useRecoilState(modalTypeState)
   const router = useRouter()
 
-  const { status } = useSession({
+  useSession({
     required: true,
     onUnauthenticated() {
       router.push('/home')
     }
   })
+
 
   return (
     <div className="bg-[#F3F2EF] dark:bg-black dark:text-white h-screen overflow-y-scroll md:space-y-6">
@@ -34,8 +36,9 @@ export default function Home({ posts }) {
         <div className='flex flex-col md:flex-row gap-5'>
           <Sidebar />
           <Feed posts={posts} />
+          <Widgets articles={articles} />
         </div>
-        {/* Widgets */}
+
         <AnimatePresence>
           {modalOpen &&
             <Modal type={modalType} handleClose={() => setModalOpen(false)} />
@@ -68,10 +71,12 @@ export async function getServerSideProps(context) {
     .sort({ timestamp: -1 })
     .toArray();
 
+  const results = await fetch(`https://newsapi.org/v2/top-headlines?country=de&apiKey=${process.env.NEWS_API}`).then((res) => res.json())
 
   return {
     props: {
       session,
+      articles: results.articles,
       posts: posts.map(post => ({
         _id: post._id.toString(),
         input: post.input,
